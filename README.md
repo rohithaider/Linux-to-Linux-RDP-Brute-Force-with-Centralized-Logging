@@ -64,7 +64,13 @@ sudo ss -tulpn | grep xrdp
 ### 5. 📡 Configure Centralized Logging (kali-logger)
 On ```kali-logger``` (log server):
 
-1. Edit rsyslog config:
+1. Install rsyslog
+```bash
+sudo apt update
+sudo apt install rsyslog
+```
+
+3. Edit rsyslog config:
 ```bash
 sudo nano /etc/rsyslog.conf
 ```
@@ -77,7 +83,49 @@ input(type="imtcp" port="514")
 ```
 ![4](https://github.com/user-attachments/assets/a056da09-bd34-4290-9467-34cf69edbff8)
 
-2.
+3. Create a log directory for incoming logs:
+```bash
+sudo mkdir /var/log/remotelogs
+sudo nano /etc/rsyslog.d/remote.conf
+```
+4. Restart ```rsyslog```
+```bash
+sudo systemctl restart rsyslog
+```
+
+---
+
+### 📤 6: Configure Victim to Send Logs to Logger
+
+1. Install rsyslog in the victim machine:
+```bash
+sudo apt update
+sudo apt install rsyslog
+```
+Edit rsyslog config:
+```bash
+sudo nano /etc/rsyslog.conf
+```
+At the bottom, add:
+```bash
+*.* @@10.0.2.7:514
+```
+2. Restart rsyslog:
+```bash
+sudo systemctl restart rsyslog
+```
+3. Test log forwarding:
+```bash
+logger "Test message from kali-victim"
+```
+![5](https://github.com/user-attachments/assets/ac85fd88-4ddf-4722-ad10-43bba3c3a419)
+
+Check on ```kali-logger```:
+```bash
+sudo tail -f /var/log/remotelogs/kali/syslog.log
+```
+![6](https://github.com/user-attachments/assets/cc15ec8f-d1f9-4b37-ae87-11ca7c182042)
 
 
+---
 
