@@ -55,3 +55,7 @@ sudo systemctl start xrdp
 ```
 ![2](https://github.com/user-attachments/assets/40fe63e3-f070-4d69-bb3e-fc3f8837df06)
 
+- Check if RDP is listening:
+```bash
+
+
