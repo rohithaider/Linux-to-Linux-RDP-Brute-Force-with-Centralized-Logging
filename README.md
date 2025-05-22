@@ -57,5 +57,27 @@ sudo systemctl start xrdp
 
 - Check if RDP is listening:
 ```bash
+sudo ss -tulpn | grep xrdp
+```
+![3](https://github.com/user-attachments/assets/a1139dd2-ace5-4080-b2b3-db20229db208)
+
+### 5. 📡 Configure Centralized Logging (kali-logger)
+On ```kali-logger``` (log server):
+
+1. Edit rsyslog config:
+```bash
+sudo nano /etc/rsyslog.conf
+```
+Uncomment or add these lines:
+```conf
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")
+```
+![4](https://github.com/user-attachments/assets/a056da09-bd34-4290-9467-34cf69edbff8)
+
+2.
+
 
 
