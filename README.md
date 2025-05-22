@@ -2,6 +2,9 @@
 
 This lab demonstrates a brute-force attack on an RDP-enabled Kali Linux machine from another Kali attacker machine. A third Kali machine acts as a **centralized log server** using `rsyslog`. The goal is to simulate failed login attempts, capture them via logs, and forward them to a centralized syslog server for monitoring.
 
+![visual](https://github.com/user-attachments/assets/9832bd65-3893-4664-9b49-dbc61096ec53)
+
+
 > ⚠️ **Educational Use Only**  
 > Do **not** use this on real or unauthorized systems.
 
